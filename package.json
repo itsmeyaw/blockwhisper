@@ -4,12 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && npx hardhat build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@dotenvx/dotenvx": "^0.44.0",
     "@thirdweb-dev/sdk": "^4.0.87",
+    "dotenv": "^16.4.5",
     "ethers": "^5",
     "next": "14.2.3",
     "react": "^18",
@@ -21,6 +23,7 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
+    "hardhat": "^2.22.4",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
