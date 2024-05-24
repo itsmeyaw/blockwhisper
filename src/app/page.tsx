@@ -1,4 +1,5 @@
 import Image from "next/image";
+import WalletConnectButton from "@/components/WalletConnectButton";
 
 export default function Home() {
   return (
@@ -108,6 +109,8 @@ export default function Home() {
           </p>
         </a>
       </div>
+
+      <WalletConnectButton/>
     </main>
   );
 }
