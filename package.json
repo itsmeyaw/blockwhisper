@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "deploy:contract": "dotenvx run -f .env.local -- hardhat ignition deploy ./ignition/modules/app.js --network sepolia",
-    "build": "next build && dotenvx run -f .env.local -- npx hardhat compile",
+    "deploy:contract": "source .env && forge script script/Rocket.s.sol:RocketScript --rpc-url \"$SEPOLIA_RPC_URL\" --broadcast --verify -vvvv",
+    "build": "next build && forge build",
     "start": "next start",
     "lint": "next lint"
   },
