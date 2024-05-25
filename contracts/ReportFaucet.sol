@@ -8,7 +8,7 @@ contract ReportFaucet is Ownable {
     address private _allowedFundTriggerAddress;
 
     event Withdrawal(
-        address indexed triggere,
+        address indexed triggerer,
         address indexed to,
         uint256 amount
     );
