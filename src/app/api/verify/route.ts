@@ -44,14 +44,13 @@ export const POST = async (req: NextRequest) => {
   );
 
   if (hcaptchaRes.data.success) {
-    // TODO submit the proof on chain
     const contract = new ethers.Contract(
       process.env.NEXT_PUBLIC_PROVE_CHECKER_SMART_CONTRACT_ADDRESS!,
       abi,
       serverWallet,
     );
 
-    const tx = await contract.fund(address);
+    const tx = await contract.addProof(address, captchaCode);
     await tx.wait();
 
     return Response.json({ tx_hash: tx.hash });
