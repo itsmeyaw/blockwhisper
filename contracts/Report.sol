@@ -2,9 +2,12 @@
 pragma solidity ^0.8.13;
 
 import {ERC721} from "../lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol";
+import "./IProveChecker.sol";
+import {HCaptchaProveChecker} from "./HCaptchaProveChecker.sol";
 
 contract Report is ERC721 {
     uint256 private _nextTokenId;
+    IProveChecker private _proofChecker;
 
     // Storage for report data
     struct ReportData {
@@ -17,26 +20,32 @@ contract Report is ERC721 {
     mapping(uint256 => uint16) private _upVote;
     mapping(uint256 => uint16) private _downVote;
 
-    constructor() ERC721("Report", "RPT") {}
+    constructor(address proofChecker) ERC721("Report", "RPT") {
+        _proofChecker = new HCaptchaProveChecker(proofChecker);
+    }
 
     function createReport(
-        address reporter,
         string memory title,
-        string memory description
+        string memory description,
+        string memory proof
     ) public returns (uint256) {
         require(bytes(title).length > 0, "Title cannot be empty");
         require(
             bytes(description).length > 20,
             "Description must be at least 20 characters long"
         );
+        require(
+            _proofChecker.checkProof(msg.sender, proof),
+            "Proof does not exists on chain yet"
+        );
 
         uint256 tokenId = _nextTokenId++;
 
         // Use _safeMint for better safety
-        _safeMint(reporter, tokenId);
+        _safeMint(msg.sender, tokenId);
 
         // Store the title and description
-        _reportData[tokenId] = ReportData(title, description);
+        _reportData[tokenId] = ReportData(title, description, proof);
 
         // Store default value for upvote and downvote
         _upVote[tokenId] = 0;
