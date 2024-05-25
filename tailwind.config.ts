@@ -14,12 +14,12 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       fontFamily: {
-        "display": "var(--font-space)"
+        display: "var(--font-space)",
       },
       colors: {
-        "accent": "#A022F5",
-        "background": "#181818"
-      }
+        accent: "#A022F5",
+        background: "#181818",
+      },
     },
   },
   plugins: [],

@@ -8,8 +8,8 @@
   }
 }
 
-
-.dark, .dark-theme {
+.dark,
+.dark-theme {
   --purple-1: #1c1424;
   --purple-2: #21152d;
   --purple-3: #32174b;
@@ -44,7 +44,8 @@
 
 @supports (color: color(display-p3 1 1 1)) {
   @media (color-gamut: p3) {
-    .dark, .dark-theme {
+    .dark,
+    .dark-theme {
       --purple-1: oklch(20.9% 0.034 305.3);
       --purple-2: oklch(22.5% 0.048 305.3);
       --purple-3: oklch(27.3% 0.093 305.3);
