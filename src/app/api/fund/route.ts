@@ -6,7 +6,7 @@ import ethers from "ethers";
 export const POST = async (req: NextRequest) => {
   const data = await req.formData();
   if (data.get("address") == null) {
-    return new Response("Missing address", {status: 400});
+    return new Response("Missing address", { status: 400 });
   }
 
   const address = data.get("address") as string;
@@ -20,5 +20,5 @@ export const POST = async (req: NextRequest) => {
   const tx = await contract.fund(address);
   await tx.wait();
 
-  return Response.json({tx_hash: tx.hash});
+  return Response.json({ tx_hash: tx.hash });
 };

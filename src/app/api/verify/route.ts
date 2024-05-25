@@ -1,5 +1,8 @@
 import { NextRequest } from "next/server";
 import axios from "axios";
+import { abi } from "@/../out/HCaptchaProveChecker.sol/HCaptchaProveChecker.json";
+import { serverWallet } from "@/services/wallet";
+import ethers from "ethers";
 
 interface VerifyResponse {
   success: true | false; // is the passcode valid, and does it meet security criteria you specified, e.g. sitekey?
@@ -8,6 +11,9 @@ interface VerifyResponse {
   credit?: true | false; // optional: deprecated field
   "error-codes"?: [string]; // optional: any error codes
 }
+
+const RPC_URL: string = process.env.SEPOLIA_RPC_URL!;
+const CONTACT_ADDRESS = process.env.HCAPTCHA_CONTACT_ADDRESS!;
 
 export const POST = async (req: NextRequest) => {
   const data = await req.formData();
@@ -38,9 +44,17 @@ export const POST = async (req: NextRequest) => {
   );
 
   if (hcaptchaRes.data.success) {
-    return new Response("OK", {
-      status: 200,
-    });
+    // TODO submit the proof on chain
+    const contract = new ethers.Contract(
+      process.env.NEXT_PUBLIC_PROVE_CHECKER_SMART_CONTRACT_ADDRESS!,
+      abi,
+      serverWallet,
+    );
+
+    const tx = await contract.fund(address);
+    await tx.wait();
+
+    return Response.json({ tx_hash: tx.hash });
   } else {
     return new Response("Verification failed", {
       status: 400,
