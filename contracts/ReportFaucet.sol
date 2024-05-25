@@ -7,19 +7,29 @@ contract ReportFaucet is Ownable {
     uint256 private _dripAmount = 0.001 ether;
     address private _allowedFundTriggerAddress;
 
-    event Withdrawal(address indexed triggere, address indexed to, uint256 amount);
+    event Withdrawal(
+        address indexed triggere,
+        address indexed to,
+        uint256 amount
+    );
 
-    constructor(address allowedFundTriggerAddress) {
+    constructor(address allowedFundTriggerAddress) Ownable(msg.sender) {
         _allowedFundTriggerAddress = allowedFundTriggerAddress;
     }
 
     receive() external payable {}
 
     function fund(address tempWalletAddress) public {
-        require(msg.sender == _allowedFundTriggerAddress, "Only authorized account can trigger funding");
-        require(address(this).balance >= _dripAmount, "Insufficient balance in faucet.");
+        require(
+            msg.sender == _allowedFundTriggerAddress,
+            "Only authorized account can trigger funding"
+        );
+        require(
+            address(this).balance >= _dripAmount,
+            "Insufficient balance in faucet."
+        );
 
-        address(tempWalletAddress).transfer(_dripAmount);
+        payable(tempWalletAddress).transfer(_dripAmount);
         emit Withdrawal(msg.sender, tempWalletAddress, _dripAmount);
     }
 
@@ -28,6 +38,6 @@ contract ReportFaucet is Ownable {
     }
 
     function withdrawFunds() external onlyOwner {
-        address(owner()).transfer(address(this).balance);
+        payable(owner()).transfer(address(this).balance);
     }
 }
