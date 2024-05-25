@@ -14,12 +14,14 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       fontFamily: {
-        "display": "var(--font-space)"
+        display: "var(--font-space)",
+        // press: ["Press Start 2P", "cursive"],
       },
       colors: {
-        "accent": "#A022F5",
-        "background": "#181818"
-      }
+        accent: "#A022F5",
+        background: "#181818",
+        navBtn: "#451DA0",
+      },
     },
   },
   plugins: [],
