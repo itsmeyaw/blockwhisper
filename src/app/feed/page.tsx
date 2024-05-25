@@ -31,7 +31,7 @@ const Feed = () => {
   return (
     <main
       className={
-        "flex flex-col px-4 h-max justify-center items-center gap-12 self-center"
+        "flex flex-col px-4 h-max justify-center items-center gap-12 self-center pb-20"
       }
     >
       <Text className="font-display">Most recent</Text>
