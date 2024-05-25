@@ -10,9 +10,12 @@ contract Report is ERC721 {
     struct ReportData {
         string title;
         string description;
+        string proofOfHumanWork;
     }
 
     mapping(uint256 => ReportData) private _reportData;
+    mapping(uint256 => uint16) private _upVote;
+    mapping(uint256 => uint16) private _downVote;
 
     constructor() ERC721("Report", "RPT") {}
 
@@ -25,10 +28,16 @@ contract Report is ERC721 {
         require(bytes(description).length > 20, "Description must be at least 20 characters long");
 
         uint256 tokenId = _nextTokenId++;
-        _safeMint(reporter, tokenId); // Use _safeMint for better safety
+
+        // Use _safeMint for better safety
+        _safeMint(reporter, tokenId);
 
         // Store the title and description
         _reportData[tokenId] = ReportData(title, description);
+
+        // Store default value for upvote and downvote
+        _upVote[tokenId] = 0;
+        _downVote[tokenId] = 0;
 
         return tokenId;
     }
