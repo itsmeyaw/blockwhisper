@@ -24,6 +24,18 @@ contract Report is ERC721 {
         _proofChecker = IProveChecker(proofChecker);
     }
 
+    function _update(
+        address to,
+        uint256 tokenId,
+        address auth
+    ) internal virtual override returns (address) {
+        // Soulbound logic: Only allow minting (to address != address(0) and auth == address(0))
+        require(to != address(0) && auth == address(0), "This token is soulbound and cannot be transferred.");
+
+        // Call the base _update function after our custom logic
+        return super._update(to, tokenId, auth); // Return the value from the base function
+    }
+
     function createReport(
         string memory title,
         string memory description,
