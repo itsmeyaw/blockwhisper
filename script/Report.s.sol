@@ -2,15 +2,15 @@
 pragma solidity ^0.8.13;
 
 import {Script, console} from "forge-std/Script.sol";
-import "../contracts/Rocket.sol";
+import "../contracts/Report.sol";
 
-contract RocketScript is Script {
+contract ReportScript is Script {
     function setUp() public {}
 
     function run() public {
         uint256 deployerPrivateKey = vm.envUint("SEPOLIA_PRIVATE_KEY");
         vm.startBroadcast(deployerPrivateKey);
-        Rocket rocket = new Rocket("itsmeYAW");
+        Report report = new Report();
         vm.stopBroadcast();
     }
 }
