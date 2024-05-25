@@ -19,7 +19,7 @@ const config: Config = {
       },
       colors: {
         accent: "#A022F5",
-        background: "#181818",
+        background: "var(--color-background)",
         navBtn: "#451DA0",
       },
     },
