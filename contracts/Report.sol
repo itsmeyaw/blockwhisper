@@ -21,7 +21,7 @@ contract Report is ERC721 {
     mapping(uint256 => uint16) private _downVote;
 
     constructor(address proofChecker) ERC721("Report", "RPT") {
-        _proofChecker = new HCaptchaProveChecker(proofChecker);
+        _proofChecker = IProveChecker(proofChecker);
     }
 
     function createReport(
@@ -34,8 +34,9 @@ contract Report is ERC721 {
             bytes(description).length > 20,
             "Description must be at least 20 characters long"
         );
+        bool checkProof = _proofChecker.checkProof(msg.sender, proof);
         require(
-            _proofChecker.checkProof(msg.sender, proof),
+            checkProof,
             "Proof does not exists on chain yet"
         );
 
@@ -55,24 +56,24 @@ contract Report is ERC721 {
     }
 
     function getTitle(
-        uint256 tokenId
+        uint256 reportId
     ) public view virtual returns (string memory) {
         require(
-            _ownerOf(tokenId) != address(0),
+            _ownerOf(reportId) != address(0),
             "ERC721Metadata: URI query for nonexistent token"
         ); // Check if token exists
-        return _reportData[tokenId].title;
+        return _reportData[reportId].title;
     }
 
     // Additional helper function to get description
     function getDescription(
-        uint256 tokenId
+        uint256 reportId
     ) public view virtual returns (string memory) {
         require(
-            _ownerOf(tokenId) != address(0),
+            _ownerOf(reportId) != address(0),
             "ERC721Metadata: URI query for nonexistent token"
         );
-        return _reportData[tokenId].description;
+        return _reportData[reportId].description;
     }
 
     function getReports(
@@ -101,5 +102,13 @@ contract Report is ERC721 {
         }
 
         return (reports, tokenIds);
+    }
+
+    function upvote(uint256 reportId) public {
+        _upVote[reportId] = _upVote[reportId] + 1;
+    }
+
+    function downvote(uint256 reportId) public {
+        _downVote[reportId] = _downVote[reportId] + 1;
     }
 }
