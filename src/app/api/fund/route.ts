@@ -1,7 +1,7 @@
 import { abi } from "@/../out/ReportFaucet.sol/ReportFaucet.json";
 import { NextRequest } from "next/server";
-import { serverWallet } from "@/services/wallet";
-import ethers from "ethers";
+import { serverWallet } from "@/services/serverWallet";
+import { ethers } from "ethers";
 
 export const POST = async (req: NextRequest) => {
   const data = await req.formData();
@@ -18,6 +18,8 @@ export const POST = async (req: NextRequest) => {
   );
 
   const tx = await contract.fund(address);
+  console.log("Transaction hash:", tx.hash);
+
   await tx.wait();
 
   return Response.json({ tx_hash: tx.hash });

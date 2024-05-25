@@ -1,7 +1,7 @@
 import { NextRequest } from "next/server";
 import axios from "axios";
 import { abi } from "@/../out/HCaptchaProveChecker.sol/HCaptchaProveChecker.json";
-import { serverWallet } from "@/services/wallet";
+import { serverWallet } from "@/services/serverWallet";
 import ethers from "ethers";
 
 interface VerifyResponse {
