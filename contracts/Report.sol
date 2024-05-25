@@ -35,10 +35,7 @@ contract Report is ERC721 {
             "Description must be at least 20 characters long"
         );
         bool checkProof = _proofChecker.checkProof(msg.sender, proof);
-        require(
-            checkProof,
-            "Proof does not exists on chain yet"
-        );
+        require(checkProof, "Proof does not exists on chain yet");
 
         uint256 tokenId = _nextTokenId++;
 
