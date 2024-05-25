@@ -15,10 +15,12 @@ const config: Config = {
       },
       fontFamily: {
         display: "var(--font-space)",
+        // press: ["Press Start 2P", "cursive"],
       },
       colors: {
         accent: "#A022F5",
         background: "#181818",
+        navBtn: "#451DA0",
       },
     },
   },

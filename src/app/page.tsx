@@ -16,7 +16,7 @@ const Home = () => {
         "flex flex-col px-10 h-max justify-center items-center gap-12 self-center"
       }
     >
-      <Text className={classNames({ hidden: wallets != null })}>
+      <Text className={classNames({ hidden: wallets != null }, "font-display")}>
         Login with your wallet to continue
       </Text>
       <div>
@@ -26,8 +26,11 @@ const Home = () => {
         <Form.Root className={"w-full flex flex-col gap-4"}>
           <Form.Field name={"title"} className={"flex flex-col gap-2"}>
             <div className={"flex flex-col"}>
-              <Form.Label>Title</Form.Label>
-              <Form.Message match="valueMissing" className={"text-red-600"}>
+              <Form.Label className="font-display">Title</Form.Label>
+              <Form.Message
+                match="valueMissing"
+                className={"text-red-600 font-display"}
+              >
                 Please enter a title
               </Form.Message>
             </div>
@@ -36,16 +39,23 @@ const Home = () => {
                 placeholder="Title of the report"
                 size={"3"}
                 required={true}
+                className="font-display"
               ></TextField.Root>
             </Form.Control>
           </Form.Field>
           <Form.Field name={"description"} className={"flex flex-col gap-2"}>
             <div className={"flex flex-col"}>
-              <Form.Label>Description</Form.Label>
-              <Form.Message match="valueMissing" className={"text-red-600"}>
+              <Form.Label className="font-display">Description</Form.Label>
+              <Form.Message
+                match="valueMissing"
+                className={"text-red-600 font-display"}
+              >
                 Please enter a description
               </Form.Message>
-              <Form.Message match="tooShort" className={"text-red-600"}>
+              <Form.Message
+                match="tooShort"
+                className={"text-red-600 font-display"}
+              >
                 Description is too short
               </Form.Message>
             </div>
@@ -55,11 +65,12 @@ const Home = () => {
                 size={"3"}
                 minLength={20}
                 required={true}
+                className="font-display h-40"
               ></TextArea>
             </Form.Control>
           </Form.Field>
           <Form.Submit>
-            <Button className={"w-full"}>Submit</Button>
+            <Button className={"w-full font-display py-5"}>Submit</Button>
           </Form.Submit>
         </Form.Root>
       )}
