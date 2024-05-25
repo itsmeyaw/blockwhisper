@@ -12,6 +12,7 @@
   "dependencies": {
     "@dotenvx/dotenvx": "^0.44.0",
     "@radix-ui/themes": "^3.0.5",
+    "classnames": "^2.5.1",
     "dotenv": "^16.4.5",
     "ethers": "^5.7.2",
     "next": "14.2.3",
