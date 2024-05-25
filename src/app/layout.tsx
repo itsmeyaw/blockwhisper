@@ -8,6 +8,7 @@ import classNames from "classnames";
 import "@radix-ui/themes/styles.css";
 import { space } from "postcss/lib/list";
 import BottomNavigator from "@/components/BottomNavigator";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 const press = Press_Start_2P({
@@ -36,6 +37,7 @@ export default function RootLayout({
           className={"w-full max-w-xl"}
         >
           <Providers>
+            <Toaster/>
             <div className={"text-white overflow-x-hidden min-h-screen"}>
               <header
                 className={
@@ -45,7 +47,11 @@ export default function RootLayout({
                 <div className={"px-2 py-1 bg-accent rounded-xl"}>
                   <Text size={"4"}>Reputation: 10</Text>
                 </div>
-                <Heading size={"8"} as={"h3"} className={"font-display mx-6"}>
+                <Heading
+                  size={"7"}
+                  as={"h3"}
+                  className={"font-display mx-6 text-center"}
+                >
                   BlockWhisper
                 </Heading>
               </header>
