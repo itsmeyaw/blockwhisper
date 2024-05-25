@@ -4,7 +4,7 @@ pragma solidity ^0.8.18;
 import {Ownable} from "../lib/openzeppelin-contracts/contracts/access/Ownable.sol";
 
 contract ReportFaucet is Ownable {
-    uint256 public dripAmount = 0.001 ether;
+    uint256 private _dripAmount = 0.001 ether;
     address private _allowedFundTrigger;
 
     event Withdrawal(address indexed triggere, address indexed to, uint256 amount);
@@ -17,14 +17,14 @@ contract ReportFaucet is Ownable {
 
     function fund(address tempWalletAddress) public {
         require(msg.sender == _allowedFundTrigger, "Only authorized account can trigger funding");
-        require(address(this).balance >= dripAmount, "Insufficient balance in faucet.");
+        require(address(this).balance >= _dripAmount, "Insufficient balance in faucet.");
 
-        address(tempWalletAddress).transfer(dripAmount);
-        emit Withdrawal(msg.sender, tempWalletAddress, dripAmount);
+        address(tempWalletAddress).transfer(_dripAmount);
+        emit Withdrawal(msg.sender, tempWalletAddress, _dripAmount);
     }
 
     function setDripAmount(uint256 newAmount) external onlyOwner {
-        dripAmount = newAmount;
+        _dripAmount = newAmount;
     }
 
     function withdrawFunds() external onlyOwner {
