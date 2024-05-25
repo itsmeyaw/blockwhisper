@@ -6,6 +6,7 @@
     "dev": "next dev",
     "format": "npx prettier . --write && npx prettier --write --plugin=prettier-plugin-solidity 'contracts/**/*.sol'",
     "deploy:contract": "source .env && forge script script/Deploy.s.sol:DeployScript --rpc-url \"$SEPOLIA_RPC_URL\" --broadcast --verify -vvvv",
+    "test:contract": "forge test -vvv",
     "build": "next build && forge build",
     "start:backend": "npx ts-node server/index.ts",
     "start": "next start",
