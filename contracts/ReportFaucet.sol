@@ -5,18 +5,18 @@ import {Ownable} from "../lib/openzeppelin-contracts/contracts/access/Ownable.so
 
 contract ReportFaucet is Ownable {
     uint256 private _dripAmount = 0.001 ether;
-    address private _allowedFundTrigger;
+    address private _allowedFundTriggerAddress;
 
     event Withdrawal(address indexed triggere, address indexed to, uint256 amount);
 
-    constructor(address _allowedFundTrigger) {
-        _allowedFundTrigger = _allowedFundTrigger;
+    constructor(address allowedFundTriggerAddress) {
+        _allowedFundTriggerAddress = allowedFundTriggerAddress;
     }
 
     receive() external payable {}
 
     function fund(address tempWalletAddress) public {
-        require(msg.sender == _allowedFundTrigger, "Only authorized account can trigger funding");
+        require(msg.sender == _allowedFundTriggerAddress, "Only authorized account can trigger funding");
         require(address(this).balance >= _dripAmount, "Insufficient balance in faucet.");
 
         address(tempWalletAddress).transfer(_dripAmount);

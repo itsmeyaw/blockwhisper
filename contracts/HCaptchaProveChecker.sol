@@ -7,8 +7,8 @@ contract HCaptchaProveChecker is Ownable {
     address private _allowedAddAddress;
     mapping(address => string) private _confirmedCodes;
 
-    constructor(address _allowedAddAddress) {
-        _allowedAddAddress = _allowedAddAddress;
+    constructor(address allowedAddAddress) {
+        _allowedAddAddress = allowedAddAddress;
     }
 
     function addConfirmedCode(address confirmedPerson, string memory code) external {
