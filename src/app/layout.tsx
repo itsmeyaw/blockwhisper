@@ -5,10 +5,14 @@ import Providers from "@/app/providers";
 import { Heading, Text, Theme } from "@radix-ui/themes";
 import classNames from "classnames";
 
-import '@radix-ui/themes/styles.css';
+import "@radix-ui/themes/styles.css";
 
 const inter = Inter({ subsets: ["latin"] });
-const space = Space_Grotesk({subsets: ["latin"], weight: ["400"], variable: '--font-space'});
+const space = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-space",
+});
 
 export const metadata: Metadata = {
   title: "Zettelkasten",
@@ -23,16 +27,27 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={classNames(space.variable, "flex justify-center")}>
-        <Theme accentColor={"purple"} panelBackground={"translucent"} appearance={"dark"} className={"w-full max-w-xl"}>
+        <Theme
+          accentColor={"purple"}
+          panelBackground={"translucent"}
+          appearance={"dark"}
+          className={"w-full max-w-xl"}
+        >
           <Providers>
             <div className={"text-white overflow-x-hidden min-h-screen"}>
-              <header className={"flex items-center flex-col justify-center p-5 gap-4"}>
+              <header
+                className={
+                  "flex items-center flex-col justify-center p-5 gap-4"
+                }
+              >
                 <div className={"px-2 py-1 bg-accent rounded-xl"}>
                   <Text size={"4"}>Reputation: 10</Text>
                 </div>
-                <Heading size={"8"} as={"h1"} className={"font-display"}>Zettelkasten</Heading>
+                <Heading size={"8"} as={"h1"} className={"font-display"}>
+                  Zettelkasten
+                </Heading>
               </header>
-            {children}
+              {children}
             </div>
           </Providers>
         </Theme>

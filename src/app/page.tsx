@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { Button, Text, TextArea, TextField } from "@radix-ui/themes";
 import WalletConnectButton from "@/components/WalletConnectButton";
@@ -11,13 +11,18 @@ const Home = () => {
   const wallets = useConnectedWallets();
 
   return (
-    <main className={"flex flex-col px-10 h-max justify-center items-center gap-12 self-center"}>
-      <Text className={classNames({"hidden": wallets != null})}>Login with your wallet to continue</Text>
+    <main
+      className={
+        "flex flex-col px-10 h-max justify-center items-center gap-12 self-center"
+      }
+    >
+      <Text className={classNames({ hidden: wallets != null })}>
+        Login with your wallet to continue
+      </Text>
       <div>
-        <WalletConnectButton/>
+        <WalletConnectButton />
       </div>
-      {
-        wallets &&
+      {wallets && (
         <Form.Root className={"w-full flex flex-col gap-4"}>
           <Form.Field name={"title"} className={"flex flex-col gap-2"}>
             <div className={"flex flex-col"}>
@@ -27,7 +32,11 @@ const Home = () => {
               </Form.Message>
             </div>
             <Form.Control asChild>
-              <TextField.Root placeholder="Title of the report" size={"3"} required={true}></TextField.Root>
+              <TextField.Root
+                placeholder="Title of the report"
+                size={"3"}
+                required={true}
+              ></TextField.Root>
             </Form.Control>
           </Form.Field>
           <Form.Field name={"description"} className={"flex flex-col gap-2"}>
@@ -41,14 +50,19 @@ const Home = () => {
               </Form.Message>
             </div>
             <Form.Control asChild>
-              <TextArea placeholder="Description of your report (min 20 characters)" size={"3"} minLength={20} required={true}></TextArea>
+              <TextArea
+                placeholder="Description of your report (min 20 characters)"
+                size={"3"}
+                minLength={20}
+                required={true}
+              ></TextArea>
             </Form.Control>
           </Form.Field>
           <Form.Submit>
             <Button className={"w-full"}>Submit</Button>
           </Form.Submit>
         </Form.Root>
-      }
+      )}
     </main>
   );
 };
