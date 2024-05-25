@@ -16,7 +16,7 @@ const Home = () => {
         "flex flex-col px-10 h-max justify-center items-center gap-12 self-center"
       }
     >
-      <Text className={classNames({ hidden: wallets != null })}>
+      <Text className={classNames({ hidden: wallets != null }, "font-display")}>
         Login with your wallet to continue
       </Text>
       <div>
@@ -65,7 +65,7 @@ const Home = () => {
                 size={"3"}
                 minLength={20}
                 required={true}
-                className="font-display"
+                className="font-display h-40"
               ></TextArea>
             </Form.Control>
           </Form.Field>

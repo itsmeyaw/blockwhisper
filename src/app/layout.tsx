@@ -45,7 +45,7 @@ export default function RootLayout({
                 <div className={"px-2 py-1 bg-accent rounded-xl"}>
                   <Text size={"4"}>Reputation: 10</Text>
                 </div>
-                <Heading size={"8"} as={"h1"} className={"font-display mx-6"}>
+                <Heading size={"8"} as={"h3"} className={"font-display mx-6"}>
                   BlockWhisper
                 </Heading>
               </header>
