@@ -32,6 +32,9 @@ contract ReportTest is Test {
         sut.setDripAmount(1 ether);
         vm.stopPrank();
 
+        vm.expectEmit(true, true, true, true, address(sut));
+        emit ReportFaucet.Withdrawal(TRIGGERER_WALLET.addr, fundedAddress, 1 ether);
+
         vm.startPrank(TRIGGERER_WALLET.addr);
         sut.fund(fundedAddress);
         vm.stopPrank();
