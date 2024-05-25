@@ -2,7 +2,7 @@ import { NextRequest } from "next/server";
 import axios from "axios";
 import { abi } from "@/../out/HCaptchaProveChecker.sol/HCaptchaProveChecker.json";
 import { serverWallet } from "@/services/serverWallet";
-import ethers from "ethers";
+import { ethers } from "ethers";
 
 interface VerifyResponse {
   success: true | false; // is the passcode valid, and does it meet security criteria you specified, e.g. sitekey?
@@ -32,10 +32,17 @@ export const POST = async (req: NextRequest) => {
     });
   }
 
+  const param = new URLSearchParams();
+  param.set("response", captchaCode.toString());
+  param.set("secret", process.env.HCAPTCHA_SECRET_KEY!);
+
   const hcaptchaRes = await axios.post<VerifyResponse>(
     "https://api.hcaptcha.com/siteverify",
-    null,
+    param,
     {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
       params: {
         response: captchaCode,
         secret: process.env.HCAPTCHA_SECRET_KEY,
