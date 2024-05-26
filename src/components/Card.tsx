@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ThickArrowDownIcon, ThickArrowUpIcon } from "@radix-ui/react-icons";
 
 interface CardProps {
@@ -14,6 +14,19 @@ const Card: React.FC<CardProps> = ({
   upvote,
   downvote,
 }) => {
+  const [proof, setProof] = useState(null);
+  const [isValid, setIsValid] = useState(null);
+
+  const verifyProof = async () => {
+    const res = await fetch("../api/zkp/verify", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(proof),
+    });
+    const data = await res.json();
+    setIsValid(data.isValid);
+  };
+
   return (
     <div className="bg-gray-800 text-white p-4 rounded-lg shadow-md flex items-start mb-4">
       <div className="flex-1">

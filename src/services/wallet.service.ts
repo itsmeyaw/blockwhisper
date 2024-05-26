@@ -20,3 +20,24 @@ export function getMasterWallet(): ethers.Wallet {
   console.log(walletString);
   return JSON.parse(JSON.stringify(walletString!));
 }
+
+export async function parseSubwallet() {
+  try {
+    let mnemonic_phrase = localStorage.getItem("masterWalletMnemonic");
+    if (!mnemonic_phrase) {
+      throw new Error("Master wallet mnemonic not found in local storage.");
+    }
+
+    let masterWallet = ethers.utils.HDNode.fromMnemonic(mnemonic_phrase);
+
+    let index = parseInt(localStorage.getItem("subWalletIndex") || "0", 10);
+
+    let subWallet = masterWallet.derivePath(`m/44'/60'/${index}'/0/0`);
+
+    localStorage.setItem("subWalletIndex", (index + 1).toString());
+    return subWallet;
+  } catch (error) {
+    console.error("Error deriving sub-wallet:", error);
+    return null;
+  }
+}
