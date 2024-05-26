@@ -37,7 +37,6 @@ Contributors:
    - [How does BlockWhisper protect users from potential retaliation or exposure?](#how-does-blockwhisper-protect-users-from-potential-retaliation-or-exposure)
    - [How does BlockWhisper compare to other platforms like SecureDrop and GlobaLeaks in terms of functionality and security?](#how-does-blockwhisper-compare-to-other-platforms-like-securedrop-and-globaleaks-in-terms-of-functionality-and-security)
 
-
 ## Problem Statement
 In today's digital age, privacy and identity crises present significant challenges, particularly within the blockchain space. Despite the promise of decentralization, many systems still expose individuals to risks of identification and retaliation when reporting sensitive information. Existing whistleblowing platforms, such as SecureDrop and GlobaLeaks, primarily cater to individual organizations and do not leverage the potential of blockchain technology to provide a truly decentralized, anonymous, and self-governing reporting system.
 
@@ -62,10 +61,43 @@ Our platform is fully decentralized, permissionless, free, and censorship-resist
 # How-To
 
 ## Frontend
-The frontend is a mobile-friendly web application. It interacts with a smart contract, which is deployed on Ethereum. The smart contract serves as the backend.
+This project is a Next.js application written in TypeScript that uses web3 mechanics to interact with smart contracts on the Ethereum blockchain. It employs the ethers package for wallet creation and management and HCaptcha to verify user interactions.
+
+### Setup
+Preconditions:
+- Node.js (>= 14.x)
+- npm
+
+```shell
+# install dependencies
+npm install
+
+```
+
+### Use
+```shell
+# run the application
+npm run dev
+```
+
+Navigate to the app: http://127.0.0.1:3000
 
 ## Smart Contract
-The smart contract is written in Solidity. Interaction happens via exposed calls, similar to any standard smart contract.
+The smart contracts are written in Solidity. Interaction happens via exposed calls. The deployed smart contracts are:
+- FAUCET_SMART_CONTRACT_ADDRESS = 0xc4C54b325bA64c473c478102C2f257774725d336
+- PROVE_CHECKER_SMART_CONTRACT_ADDRESS = 0xc4FfC69934B5Df96afE0733fC57477c7e210Acf3
+- REPORT_SMART_CONTRACT_ADDRESS = 0x1448540a5d6014607449C1006f78F9B1ADcEc91b
+
+### Setup
+Preconditions:
+- npm
+- hardhat
+
+### Use
+```shell
+# compile smart contract
+npx hardhat compile
+```
 
 ## Zero-Knowledge-Proof (ZKP) System
 
