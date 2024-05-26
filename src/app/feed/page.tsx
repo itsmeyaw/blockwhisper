@@ -2,6 +2,7 @@
 
 import Card from "@/components/Card";
 import { Text } from "@radix-ui/themes";
+import { useState } from "react";
 
 const posts = [
   {
