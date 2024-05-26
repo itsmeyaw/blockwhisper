@@ -4,11 +4,10 @@ import "./globals.css";
 import Providers from "@/app/providers";
 import { Heading, Text, Theme } from "@radix-ui/themes";
 import classNames from "classnames";
-
 import "@radix-ui/themes/styles.css";
-import { space } from "postcss/lib/list";
 import BottomNavigator from "@/components/BottomNavigator";
 import { Toaster } from "react-hot-toast";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 const press = Press_Start_2P({
@@ -37,16 +36,13 @@ export default function RootLayout({
           className={"w-full max-w-xl"}
         >
           <Providers>
-            <Toaster/>
+            <Toaster />
             <div className={"text-white overflow-x-hidden min-h-screen"}>
               <header
                 className={
                   "flex items-center flex-col justify-center p-5 gap-4"
                 }
               >
-                <div className={"px-2 py-1 bg-accent rounded-xl"}>
-                  <Text size={"4"}>Reputation: 10</Text>
-                </div>
                 <Heading
                   size={"7"}
                   as={"h3"}
@@ -54,6 +50,12 @@ export default function RootLayout({
                 >
                   BlockWhisper
                 </Heading>
+                <Link
+                  className="flex flex-col items-center bg-accent py-4 px-8 my-5  rounded-md"
+                  href="/mint"
+                >
+                  <span className="font-display">Mint wallet</span>
+                </Link>
               </header>
               {children}
             </div>
