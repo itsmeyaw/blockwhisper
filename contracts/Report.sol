@@ -6,7 +6,7 @@ import "./IProveChecker.sol";
 import {HCaptchaProveChecker} from "./HCaptchaProveChecker.sol";
 
 contract Report is ERC721 {
-    uint256 private _nextTokenId;
+    uint256 private _nextTokenId = 0;
     IProveChecker private _proofChecker;
 
     // Storage for report data
@@ -14,11 +14,11 @@ contract Report is ERC721 {
         string title;
         string description;
         string proofOfHumanWork;
+        uint16 upVote;
+        uint16 downVote;
     }
 
     mapping(uint256 => ReportData) private _reportData;
-    mapping(uint256 => uint16) private _upVote;
-    mapping(uint256 => uint16) private _downVote;
 
     constructor(address proofChecker) ERC721("Report", "RPT") {
         _proofChecker = IProveChecker(proofChecker);
@@ -58,18 +58,18 @@ contract Report is ERC721 {
         _safeMint(msg.sender, tokenId);
 
         // Store the title and description
-        _reportData[tokenId] = ReportData(title, description, proof);
-
-        // Store default value for upvote and downvote
-        _upVote[tokenId] = 0;
-        _downVote[tokenId] = 0;
+        _reportData[tokenId] = ReportData(title, description, proof, 0, 0);
 
         return tokenId;
     }
 
+    function test() public returns (string memory) {
+        return "This is a string";
+    }
+
     function getTitle(
         uint256 reportId
-    ) public view virtual returns (string memory) {
+    ) public view returns (string memory) {
         require(
             _ownerOf(reportId) != address(0),
             "ERC721Metadata: URI query for nonexistent token"
@@ -80,7 +80,7 @@ contract Report is ERC721 {
     // Additional helper function to get description
     function getDescription(
         uint256 reportId
-    ) public view virtual returns (string memory) {
+    ) public view returns (string memory) {
         require(
             _ownerOf(reportId) != address(0),
             "ERC721Metadata: URI query for nonexistent token"
@@ -104,23 +104,28 @@ contract Report is ERC721 {
         uint256[] memory tokenIds = new uint256[](startIndex - endIndex + 1);
         uint256 counter = 0;
 
-        for (uint256 i = startIndex; i >= endIndex; i--) {
+        for (uint256 i = startIndex; i >= endIndex;) {
             if (_ownerOf(i) != address(0)) {
                 // Ensure the token exists before adding to the result
                 reports[counter] = _reportData[i];
                 tokenIds[counter] = i;
                 counter++;
             }
+            if (i > 0) {
+                i--;
+            } else {
+                break;
+            }
         }
 
         return (reports, tokenIds);
     }
 
-    function upvote(uint256 reportId) public {
-        _upVote[reportId] = _upVote[reportId] + 1;
+    function upVote(uint256 reportId) public {
+        _reportData[reportId].upVote = _reportData[reportId].upVote + 1;
     }
 
-    function downvote(uint256 reportId) public {
-        _downVote[reportId] = _downVote[reportId] + 1;
+    function downVote(uint256 reportId) public {
+        _reportData[reportId].downVote = _reportData[reportId].downVote + 1;
     }
 }
