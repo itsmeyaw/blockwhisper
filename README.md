@@ -1,66 +1,30 @@
-## Foundry
+# BlockWhisper
+Contributors:
+- [itsmeyaw](https://github.com/itsmeyaw)
+- [gopimehta](https://github.com/gopimehta)
+- [alexhaeringer](https://github.com/alexhaeringer)
+- [hashkode](https://github.com/hashkode)
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+## Problem Statement
 
-Foundry consists of:
+## Constraints
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+# How-To
 
-## Documentation
+## Frontend
 
-https://book.getfoundry.sh/
+## Smart Contract
 
-## Usage
+# Design Docmentation
 
-### Build
+## Concept
 
-```shell
-$ forge build
-```
+## Challenges
 
-### Test
+# FAQ
 
-```shell
-$ forge test
-```
+## What is the matter with anonymious vs. pseudonomious submissions?
 
-### Format
+## What is Proof of Human Work (PoHW)?
 
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+## Why are externally funded transactions required?
