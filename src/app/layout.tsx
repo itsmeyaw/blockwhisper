@@ -37,7 +37,7 @@ export default function RootLayout({
           className={"w-full max-w-xl"}
         >
           <Providers>
-            <Toaster/>
+            <Toaster />
             <div className={"text-white overflow-x-hidden min-h-screen"}>
               <header
                 className={
