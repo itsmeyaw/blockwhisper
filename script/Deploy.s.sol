@@ -23,6 +23,10 @@ contract DeployScript is Script {
         ReportFaucet reportFaucet = new ReportFaucet(vm.addr(deployerPrivateKey));
         console.log("NEXT_PUBLIC_FAUCET_SMART_CONTRACT_ADDRESS=", address(reportFaucet));
 
+        console.log("Adding fund to the faucet");
+        payable(address(reportFaucet)).transfer(0.5 ether);
+        console.log("New faucet fund", address(reportFaucet).balance);
+
         vm.stopBroadcast();
     }
 }
