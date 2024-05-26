@@ -4,7 +4,7 @@ pragma solidity ^0.8.18;
 import {Ownable} from "../lib/openzeppelin-contracts/contracts/access/Ownable.sol";
 
 contract ReportFaucet is Ownable {
-    uint256 private _dripAmount = 0.001 ether;
+    uint256 private _dripAmount = 0.01 ether;
     address private _allowedFundTriggerAddress;
 
     event Withdrawal(
