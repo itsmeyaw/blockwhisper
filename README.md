@@ -73,6 +73,7 @@ The smart contract is written in Solidity. Interaction happens via exposed calls
 Preconditions:
 - git installed
 - node and npm installed
+- rust installed
 
 ```shell
 mkdir tmp
