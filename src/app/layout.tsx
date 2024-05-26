@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import { Inter, Press_Start_2P } from "next/font/google";
 import "./globals.css";
 import Providers from "@/app/providers";
-import { Heading, Text, Theme } from "@radix-ui/themes";
+import { Theme } from "@radix-ui/themes";
 import classNames from "classnames";
 import "@radix-ui/themes/styles.css";
 import BottomNavigator from "@/components/BottomNavigator";
 import { Toaster } from "react-hot-toast";
-import Link from "next/link";
+import Header from "@/components/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 const press = Press_Start_2P({
@@ -38,25 +38,7 @@ export default function RootLayout({
           <Providers>
             <Toaster />
             <div className={"text-white overflow-x-hidden min-h-screen"}>
-              <header
-                className={
-                  "flex items-center flex-col justify-center p-5 gap-4"
-                }
-              >
-                <Heading
-                  size={"7"}
-                  as={"h3"}
-                  className={"font-display mx-6 text-center"}
-                >
-                  BlockWhisper
-                </Heading>
-                <Link
-                  className="flex flex-col items-center bg-accent py-4 px-8 my-5  rounded-md"
-                  href="/mint"
-                >
-                  <span className="font-display">Mint wallet</span>
-                </Link>
-              </header>
+              <Header /> {/* Use the Header component here */}
               {children}
             </div>
             <BottomNavigator />

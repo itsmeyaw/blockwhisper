@@ -1,13 +1,10 @@
 "use client";
 
 import { Button, Text, TextArea, TextField } from "@radix-ui/themes";
-import WalletConnectButton from "@/components/WalletConnectButton";
-import { useActiveWallet, useSendAndConfirmTransaction, useSendTransaction } from "thirdweb/react";
-import classNames from "classnames";
+import { useActiveWallet, useSendAndConfirmTransaction } from "thirdweb/react";
 import * as Form from "@radix-ui/react-form";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import toast from "react-hot-toast";
-import { useState } from "react";
 import { FormEvent, useRef, useState } from "react";
 import { prepareContractCall, getContract } from "thirdweb";
 import { client } from "@/services/ThirdWeb";
@@ -30,12 +27,6 @@ const Home = () => {
   const [captchaSubmitted, setCaptchaSubmitted] = useState(false);
   const { mutate: sendTransaction, isPending } = useSendAndConfirmTransaction();
 
-  // const submitCaptchaToContract = (captchaCode: string) => {
-  //   if (wallet && wallet.getAccount()) {
-  //     console.log("Submitting captcha");
-  //     const formData = new FormData();
-  //     formData.set("address", wallet.getAccount()?.address!);
-  //     formData.set("captcha", captchaCode);
   const submitCaptchaToContract = (captchaCode: string) => {
     if (wallet && wallet.getAccount()) {
       console.log("Submitting captcha");
@@ -47,7 +38,8 @@ const Home = () => {
         fetch("/api/verify", {
           method: "POST",
           body: formData,
-        }).then((res) => res.json())
+        })
+          .then((res) => res.json())
           .then((res) => setCaptchaSubmitted(true)),
         {
           loading: "Submitting captcha to chain",
@@ -81,14 +73,19 @@ const Home = () => {
   const submitFunction = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!wallet || !titleRef.current || !descRef.current || !captchaRef.current) {
-      console.error("Title or desc ref is null")
+    if (
+      !wallet ||
+      !titleRef.current ||
+      !descRef.current ||
+      !captchaRef.current
+    ) {
+      console.error("Title or desc ref is null");
     } else {
       await toast.promise(requestFaucet(wallet.getAccount()?.address!), {
         loading: "Requesting fund for your wallet",
         success: "Successfully funded your wallet",
         error: (err) => `Error funding your wallet: ${err.message}`,
-      })
+      });
 
       const title = titleRef.current.value;
       const desc = descRef.current.value;
@@ -96,7 +93,8 @@ const Home = () => {
 
       const transaction = prepareContractCall({
         contract,
-        method: "function createReport(string memory title, string memory description, string memory proof) public returns (uint256)",
+        method:
+          "function createReport(string memory title, string memory description, string memory proof) public returns (uint256)",
         params: [title, desc, captcha],
       });
       const transactionPromise = new Promise<void>((resolve, reject) => {
@@ -112,7 +110,7 @@ const Home = () => {
         error: (err) => `Error submitting report: ${err.message}`,
       });
     }
-  }
+  };
 
   return (
     <main
@@ -121,7 +119,10 @@ const Home = () => {
       }
     >
       {/* {wallet && ( */}
-      <Form.Root className={"w-full flex flex-col gap-4"} onSubmit={event => submitFunction(event)}>
+      <Form.Root
+        className={"w-full flex flex-col gap-4"}
+        onSubmit={(event) => submitFunction(event)}
+      >
         <Form.Field name={"title"} className={"flex flex-col gap-2"}>
           <div className={"flex flex-col"}>
             <Form.Label className="font-display">Title</Form.Label>
