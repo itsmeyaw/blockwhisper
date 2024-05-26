@@ -41,7 +41,7 @@ Contributors:
 ## Problem Statement
 In today's digital age, privacy and identity crises present significant challenges, particularly within the blockchain space. Despite the promise of decentralization, many systems still expose individuals to risks of identification and retaliation when reporting sensitive information. Existing whistleblowing platforms, such as SecureDrop and GlobaLeaks, primarily cater to individual organizations and do not leverage the potential of blockchain technology to provide a truly decentralized, anonymous, and self-governing reporting system.
 
-BlockWhisper aims to address these gaps by offering a decentralized platform that enables anyone to anonymously share sensitive information without fear of identity exposure, harassment, or legal repercussions. Our platform ensures that no single entity controls the information, thus preventing censorship and promoting transparency.
+BlockWhisper aims to address these gaps by offering a decentralized platform that enables anyone to anonymously share sensitive information without fear of identity exposure, harassment, or legal repercussions. Our platform ensures that no single entity controls the information, thus preventing censorship and promoting transparency. BlockWhisper can ensure full anonymity while maintaining a reputation system. This way, users can build trust in the platform without revealing their identities.
 
 Keywords: Freedom of speech, Anonymity, Decentralization
 
